@@ -1,15 +1,22 @@
 //Connecting to the rectangle.js
-const rect = require('./rectangle')
+const rect = require("./rectangle");
 
 function solveRect(l, w) {
-    console.log(`Solving for rectangle with dimensions: ${l}, ${w}`);
+  console.log(`Solving for rectangle with dimensions: ${l}, ${w}`);
 
-    if (l <= 0 || w <= 0) {
-        console.log(`Rectangle dimensions must be greater than zero. Received: ${l}, ${w}`);
+  //This function is defined (not executed) in line but will not be used until enters the code inside the rectangle module
+  //This says if there was an error than we console log the error defined in rectangle.js
+  rect(l, w, (err, rectangle) => {
+    if (err) {
+      console.log("ERROR:", err.message);
     } else {
-        console.log(`Area of rectangle: ${rect.area(l, w)}`);
-        console.log(`Perimeter of rectangle: ${rect.perimeter(l, w)}`);
+        //The name rectangle below is coming from the function above where we passed in rectangle
+        //The paramater list can be empty since we passed paramaters at the top with the solveRect function
+      console.log(`Area of rectangle with dimensions ${l}, ${w} is: ${rectangle.area()}`);
+      console.log(`Perimeter of rectangle: ${rect.perimeter()}`);
     }
+  });
+  console.log('This statement is logged after the call to rect()')
 }
 
 solveRect(2, 4);
